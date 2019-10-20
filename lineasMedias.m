@@ -24,8 +24,8 @@ end
 
 XL = 0.1736 * log10(DMG/RMG)*longitud;%ohms
 
-yc = (0.000009085/(log10(DMG/radio)))*100;%convertir con angulo de 90
-yc = yc*cosd(90)+(i*yc*sin(90));% se convierte a numero complejo forma binomica
+ycModulo = (0.000009085/(log10(DMG/radio)))*100;%convertir con angulo de 90
+yc = ycModulo*cosd(90)+(i*ycModulo*sin(90));% se convierte a numero complejo forma binomica
 
 z = (resistencia+(XL*i));
 
@@ -38,8 +38,8 @@ elseif numConduc == 4
 end
 
 vr = (vL/sqrt(3))*1000;%vR
-Ir = demanda / (sqrt(3)*vL * abs(fp));
-Ir = Ir*cosd(-angulo)+(i*Ir*sind(-angulo));%conversión a numero complejo 
+IrPolar = demanda / (sqrt(3)*vL * abs(fp));
+Ir = IrPolar*cosd(-angulo)+(i*IrPolar*sind(-angulo));%conversión a numero complejo 
 
 vF = vr*(1+((z*yc)/2))+z*Ir;
 vFModulo = abs(vF);%Modulo en su forma polar 
@@ -57,10 +57,11 @@ perdidas = (3*resistencia*(iXModulo^2))/1000;
 eficiencia = (demanda/(demanda+perdidas))*100;
 
 toString = sprintf('\tModelo de lineas\n\n ');
-toString = toString + sprintf("DMG : %f \n RMG : %f \n XL : %f \n ",DMG,RMG,XL);
-toString = toString + sprintf("yc : %f \n Z : %f \n vr : %f \n Ir : %f \n ",yc,z,vr,Ir);
-toString = toString + sprintf("vF : %f < %f ° \n iF : %f < %f °\n iX : %f < %f °\n ",vFModulo,vFArgumento,iFModulo,iFArgumento,iXModulo,iXArgumento);
-toString = toString + sprintf("reg : %f \n perdidas : %f \n eficiencia : %f ",Reg,perdidas,eficiencia);
+toString = toString + sprintf("DMG : %f m \n RMG : %f m \n XL : %f Ohm \n ",DMG,RMG,XL);
+toString = toString + sprintf("yc : %f < 90 ° \n Z : %s \n vr : %f kV \n Ir : %f < %f \n ",ycModulo,num2str(z),vr,IrPolar,angulo);
+toString = toString + sprintf("vF : %f < %f ° V \n iF : %f < %f ° Amp \n iX : %f < %f °\n ",vFModulo,vFArgumento,iFModulo,iFArgumento,iXModulo,iXArgumento);
+toString = toString + sprintf("reg : %f \n perdidas : %f kW \n eficiencia : %f ",Reg,perdidas,eficiencia);
 
 toString
+
 end

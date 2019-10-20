@@ -53,7 +53,7 @@ eficiencia = (demanda / (demanda+perdidas))*100;%en porcentaje
 
 toString = sprintf("\tLINEAS CORTAS\n\n");
 toString = toString + sprintf (" DMG : %f m \n RMG :%f m \n XL : %f Ohms \n Ir : %f < %f Amp \n VR : %f kV \n",DMG,RMG,XL,Ir,angulo,Vr);
-toString = toString + sprintf(" z = %f < %f \n IR : %f kV \n lXl : %f kV\n vF : %f kV \n",zModulo,zArgumento,IR,lXl,vf);
-toString = toString + sprintf(" reg : %f  \n Perdidas : %f kW \n Eficiencia : %f \n",reg,perdidas,eficiencia);
+toString = toString + sprintf(" z = %f < %f \n IR : %f kV \n lXl : %f \n vF : %f \n",zModulo,zArgumento,IR,lXl,vf);
+toString = toString + sprintf(" reg : %f \n Perdidas : %f \n Eficiencia : %f \n",reg,perdidas,eficiencia);
 
 toString
